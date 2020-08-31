@@ -21,6 +21,11 @@ Bot.once('ready', () => {
 
 Bot.on('message' , async message =>{
 
+    if(message.author.bot)
+    {
+        return;
+    }
+
     const args = message.content.slice(process.env.prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
