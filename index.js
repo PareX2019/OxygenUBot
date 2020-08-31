@@ -65,12 +65,17 @@ Bot.on('message' , async message =>{
     else if(command === 'oxy_api'){
         Bot.commands.get('oxy_api').execute(message,args);
     }
+    else if(command === 'log_commands'){
+        if(message.author.id === '503471433415000079'){
     const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-
-
       commandFiles.forEach(command2 =>{
        console.log(command2);
       });
+        }
+        else{
+            return;
+        }
+    }
 });
 
 
