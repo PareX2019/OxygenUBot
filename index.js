@@ -19,20 +19,6 @@ Bot.once('ready', () => {
     console.log(`${Bot.user.username} is now Running.`);
 });
 
-
-async function registerCommands(message,args,dataALL,data){
-    const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-    commandFiles.forEach(command2 =>{
-     const big = command2.replace(".js"," ");
-
-     if(command === big){
-      Bot.commands.get(big).execute(message,args,dataALL,data);
-     }
-     console.log(big);
-     
-  })
-}
-
 Bot.on('message' , async message =>{
 
     if(message.author.bot || message.member.roles.find("710416627409223737")||message.member.roles.find("710416627409223738")||message.member.roles.find("741734635674927114")||member.roles.find("710416627413549127")||member.roles.find("710416627413549128")){
@@ -68,8 +54,17 @@ Bot.on('message' , async message =>{
     const dataALL = await api.all();
 
     if(!message.content.startsWith(process.env.prefix) || message.author.bot) return;
-    
-    registerCommands(message,args,dataALL,data)
+
+    const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
+    commandFiles.forEach(command2 =>{
+     const big = command2.replace(".js"," ");//list of the commands
+
+   //  if(command === big){
+    //  Bot.commands.get().execute(message,args,dataALL,data);
+   //  }
+     console.log(big.description);
+     
+  })
 });
 
 
