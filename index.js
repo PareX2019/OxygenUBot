@@ -27,7 +27,7 @@ Bot.on('message' , async message =>{
     const data = await api.countries({country: args});
     const dataALL = await api.all();
 
-    if(message.content.includes("help"||"Help"||"HELP")){
+    if(message.content.includes("help")||message.content.includes("Help")||message.content.includes("HELP")){
         if (talkedRecently.has(message.author.id)) {
             return;
     } else {
@@ -60,6 +60,12 @@ Bot.on('message' , async message =>{
     else if(command === 'oxy_api'){
         Bot.commands.get('oxy_api').execute(message,args);
     }
+    const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
+
+
+      commandFiles.forEach(command2 =>{
+       console.log(command2);
+      });
 });
 
 
