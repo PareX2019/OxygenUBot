@@ -21,7 +21,7 @@ Bot.once('ready', () => {
 
 Bot.on('message' , async message =>{
 
-    if(message.author.bot || message.member.roles.find("710416627409223737")||message.member.roles.find("710416627409223738")||message.member.roles.find("741734635674927114")||member.roles.find("710416627413549127")||member.roles.find("710416627413549128")){
+    if(message.author.bot || message.author.roles.find("710416627409223737")||message.author.roles.find("710416627409223738")||message.author.roles.find("741734635674927114")||message.author.author.find("710416627413549127")||message.author.roles.find("710416627413549128")){
        return;
     }
     else
