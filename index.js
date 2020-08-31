@@ -27,7 +27,7 @@ Bot.on('message' , async message =>{
     const data = await api.countries({country: args});
     const dataALL = await api.all();
 
-    if(message.content.includes("help")){
+    if(message.content.includes("help"||"Help"||"HELP")){
         if (talkedRecently.has(message.author.id)) {
             return;
     } else {
@@ -42,7 +42,7 @@ Bot.on('message' , async message =>{
         talkedRecently.add(message.author.id);
         setTimeout(() => {
           talkedRecently.delete(message.author.id);
-        }, 60000);
+        }, 600000);
     }
     }
 
