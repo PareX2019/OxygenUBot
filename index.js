@@ -69,7 +69,8 @@ Bot.on('message' , async message =>{
         if(message.author.id === '503471433415000079'){
     const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
       commandFiles.forEach(command2 =>{
-       console.log(command2);
+       const big = command2.replace(".js"," ");
+       console.log(big);
       });
         }
         else{
