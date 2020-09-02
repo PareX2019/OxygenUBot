@@ -20,12 +20,6 @@ Bot.once('ready', () => {
 });
 
 Bot.on('message' , async message =>{
-
-    if(message.author.bot || message.author.roles.cache.has("710416627409223737")||message.author.roles.cache.has("710416627409223738")||message.author.roles.cache.has("741734635674927114")||message.author.roles.cache.has("710416627413549127")||message.author.roles.cache.has("710416627413549128")){
-       return;
-    }
-    else
-    {
         if(message.content.includes("help")||message.content.includes("Help")||message.content.includes("HELP")){
             if (talkedRecently.has(message.author.id)) {
                 return;
@@ -44,27 +38,35 @@ Bot.on('message' , async message =>{
             }, 600000);
         }
         }
+
+    let inviteLinks = ["discord.gg","discord.com/invite","discordapp.com/invite","discord.io","discord.link","invite.gg"]
+    let iploggerLinks = ["grabify.org","iplogger.com","grabify.link","iplogger.org","2no.co","iplogger.com","iplogger.ru","iplogger.ru","yip.su","yip.su","iplogger.co","iplogger.info","ipgrabber.ru<","ipgraber.ru","iplis.ru","02ip.ru","ezstat.ru"]
+    if(message.author.bot) return;
+    if(!message.member.hasPermission("VIEW_AUDIT_LOG")){
+        if(inviteLinks.some(word => message.content.toLowerCase().includes(word))) {
+            await message.delete()
+            return message.channel.send('Server Invites Are Forbiden!')
+        }
+        if(iploggerLinks.some(word => message.content.toLowerCase().includes(word))) {
+            await message.delete()
+            return message.guild.members.cache.get(message.author.user.id).ban('Posting IP Loggers thanks to masterzz sexy auto mod they just got banned.(spoonfed me yes)')
+        }
     }
-   
-
-    const args = message.content.slice(process.env.prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
-
-    const data = await api.countries({country: args});
-    const dataALL = await api.all();
-
-    if(!message.content.startsWith(process.env.prefix) || message.author.bot) return;
-
-    const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-    commandFiles.forEach(command2 =>{
-     const big = command2.replace(".js"," ");//list of the commands
-
-   //  if(command === big){
-    //  Bot.commands.get().execute(message,args,dataALL,data);
-   //  }
-     console.log(big.description);
-     
-  })
+    const responding = message.content.toLowerCase()
+    if(responding.includes('<@!749022439438287019>')){
+        message.channel.send('My prefix is \`;\` just incase you forgot.')
+    }
+    if(!message.content.toLowerCase().startsWith(process.env.prefix)) return;
+	const args = message.content.slice(process.env.prefix.length).trim().split(/ +/g);
+	const cmd = args.shift().toLowerCase();
+	let command = Bot.commands.get(cmd);
+	if(!command) command = Bot.commands.get(Bot.aliases.get(cmd));
+	if(command){
+		if(command.category === "developer" && message.author.id != 503471433415000079) return;
+		if(command.requiredRole && !message.member.roles.cache.some(role => role.name === command.requiredRole)) return;
+		command.run(Bot, message, args);
+	}
+    
 });
 
 

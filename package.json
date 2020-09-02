@@ -9,9 +9,11 @@
   "author": "PareX",
   "license": "ISC",
   "dependencies": {
+    "ascii-table": "0.0.9",
     "beautify": "0.0.8",
     "covidapi": "^0.5.0",
     "discord.js": "^12.3.1",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "util": "^0.12.3"
   }
 }
