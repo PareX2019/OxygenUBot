@@ -7,14 +7,6 @@ const fs = require("fs");
 Bot.commands = new Discord.Collection();
 const talkedRecently = new Set();
 
-const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-
-for(const file of commandFiles){
-    const command = require(`./commands/${file}`);
- 
-    Bot.commands.set(command.name, command);
-}
-
 Bot.once('ready', () => {
     console.log(`${Bot.user.username} is now Running.`);
 });
@@ -45,7 +37,7 @@ Bot.on('message' , async message =>{
     if(!message.member.hasPermission("VIEW_AUDIT_LOG")){
         if(inviteLinks.some(word => message.content.toLowerCase().includes(word))) {
             await message.delete()
-            return message.channel.send('Server Invites Are Forbiden!')
+            return message.reply('Server Invites Are Forbiden!')
         }
         if(iploggerLinks.some(word => message.content.toLowerCase().includes(word))) {
             await message.delete()
