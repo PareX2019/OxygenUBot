@@ -15,6 +15,7 @@ client.once('ready', () => {
 
 client.on('message' , async message =>{
     
+       if(message.author.bot) return;
         if(message.content.includes("help")||message.content.includes("Help")||message.content.includes("HELP")){
             if (talkedRecently.has(message.author.id)) {
                 return;
@@ -36,7 +37,6 @@ client.on('message' , async message =>{
 
     let inviteLinks = ["discord.gg","discord.com/invite","discordapp.com/invite","discord.io","discord.link","invite.gg"]
     let iploggerLinks = ["grabify.org","iplogger.com","grabify.link","iplogger.org","2no.co","iplogger.com","iplogger.ru","iplogger.ru","yip.su","yip.su","iplogger.co","iplogger.info","ipgrabber.ru<","ipgraber.ru","iplis.ru","02ip.ru","ezstat.ru"]
-    if(message.author.client) return;
     if(!message.member.hasPermission("VIEW_AUDIT_LOG")){
         if(inviteLinks.some(word => message.content.toLowerCase().includes(word))) {
             await message.delete()
@@ -51,18 +51,12 @@ client.on('message' , async message =>{
     if(responding.includes('<@!749022439438287019>')){
         message.reply('My prefix is \`;\` just incase you forgot.')
     }
-    console.log("1st step passed");
     if(!message.content.toLowerCase().startsWith(process.env.prefix)) return;
-    console.log("step 2");
 	const args = message.content.slice(process.env.prefix.length).trim().split(/ +/g);
-    const cmd = args.shift().toLowerCase();
-    console.log("args/cmd set");
-    let command = client.commands.get(cmd);
-    console.log("variable naming passed");
-    if(!command) command = client.commands.get(client.aliases.get(cmd));
-    console.log("idk");
+	const cmd = args.shift().toLowerCase();
+	let command = client.commands.get(cmd);
+	if(!command) command = client.commands.get(client.aliases.get(cmd));
 	if(command){
-        console.log("executing error");
 		//>if(command.category === "developer" && message.author.id != 503471433415000079) return;
 		//if(command.requiredRole && !message.member.roles.cache.some(role => role.name === command.requiredRole)) return;
         command.run(client, message, args);
