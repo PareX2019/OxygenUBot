@@ -49,7 +49,7 @@ client.on('message' , async message =>{
     }
     const responding = message.content.toLowerCase()
     if(responding.includes('<@!749022439438287019>')){
-        message.channel.send('My prefix is \`;\` just incase you forgot.')
+        message.reply('My prefix is \`;\` just incase you forgot.')
     }
     if(!message.content.toLowerCase().startsWith(process.env.prefix)) return;
 	const args = message.content.slice(process.env.prefix.length).trim().split(/ +/g);
@@ -59,7 +59,8 @@ client.on('message' , async message =>{
 	if(command){
 		if(command.category === "developer" && message.author.id != 503471433415000079) return;
 		if(command.requiredRole && !message.member.roles.cache.some(role => role.name === command.requiredRole)) return;
-		command.run(client, message, args);
+        command.run(client, message, args);
+        console.log(command.name.toString());
 	}
     
 });
