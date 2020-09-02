@@ -13,7 +13,7 @@ module.exports = {
             .addField("Usage: `~eval [code]`")
             .addFooter(`Command Run By ${message.author.username}`,message.author.avatarURL)
             
-            return message.channel.send(EmbedYes);
+             message.channel.send(EmbedYes);
         } 
         let code = `(async () => {${args.join(" ")}})()`;
         try {
@@ -26,7 +26,7 @@ module.exports = {
                 .addField(`Some Monkey Called ${message.author.username} Just Tried To Get ${client.user.username} Token.`)
                 .addFooter(`Command Run By ${message.author.username}`,message.author.avatarURL)
 
-                return  client.channels.get('750704480433078352').send(monkEmbed);
+                client.channels.get('750704480433078352').send(monkEmbed);
             }
             let CorrectEmbed = new discord.MessageEmbed()
             .setColor('#00a9be')
@@ -35,7 +35,7 @@ module.exports = {
             .addField(`Ran the code. Output: \`\`\`js ${evaluated}\`\`\``)
             .addFooter(`Command Run By ${message.author.username}`,message.author.avatarURL)
 
-            return message.channel.send(CorrectEmbed);
+            message.channel.send(CorrectEmbed);
         } catch(err) {
             let errorEmbed = new discord.MessageEmbed()
             .setColor('#00a9be')
@@ -44,7 +44,7 @@ module.exports = {
             .addField(`Code failed to run. Output: \`\`\`${err.message}\`\`\``)
             .addFooter(`Command Run By ${message.author.username}`,message.author.avatarURL)
             
-            return message.channel.send(errorEmbed);
+            message.channel.send(errorEmbed);
         }
     }
 }
