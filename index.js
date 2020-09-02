@@ -57,8 +57,8 @@ client.on('message' , async message =>{
 	let command = client.commands.get(cmd);
 	if(!command) command = client.commands.get(client.aliases.get(cmd));
 	if(command){
-		//if(command.category === "developer" && message.author.id != 503471433415000079) return;
-		if(command.requiredRole && !message.member.roles.cache.some(role => role.name === command.requiredRole)) return;
+		//>if(command.category === "developer" && message.author.id != 503471433415000079) return;
+		//if(command.requiredRole && !message.member.roles.cache.some(role => role.name === command.requiredRole)) return;
         command.run(client, message, args);
         console.log(command.name.toString());
 	}
