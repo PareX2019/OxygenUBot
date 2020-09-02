@@ -57,9 +57,16 @@ client.on('message' , async message =>{
 	let command = client.commands.get(cmd);
 	if(!command) command = client.commands.get(client.aliases.get(cmd));
 	if(command){
-		//>if(command.category === "developer" && message.author.id != 503471433415000079) return;
-		//if(command.requiredRole && !message.member.roles.cache.some(role => role.name === command.requiredRole)) return;
+		if(command.category === "developer" && message.author.id != 503471433415000079) return;
         command.run(client, message, args);
+        const logEmbed = new Discord.MessageEmbed()
+        .setTitle("Oxygen U")
+        .setDescription(`Category Of Command ${command.category}`)
+        .setColor("#00a9be")
+        .addField(command.description,command.name)
+        .addTimestamp()
+        .addFooter(message.author.username,message.author.avatarURL());
+
         console.log(command.name.toString());
 	}
     
