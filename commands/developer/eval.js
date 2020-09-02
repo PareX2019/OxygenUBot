@@ -1,14 +1,15 @@
 const {inspect} = require("util");
-const discord = require("discord.js");
+const Discord = require('discord.js');
+
 module.exports = {
     name: "eval",
     category: "developer",
     description: "Allows the developers to run JavaScript code.",
     run: async (client, message, args) => {
         if(!args[0]){
-            const EmbedYes = new discord.MessageEmbed()
+            const EmbedYes = new Discord.MessageEmbed()
             .setColor('#00a9be')
-            .setTimestamp()
+            .setTimestam()
             .setTitle("Oxgygen U")
             .addField("Usage: `~eval [code]`")
             .addFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
@@ -19,7 +20,7 @@ module.exports = {
         try {
             let evaluated = inspect(eval(code, {depth: 0}));
             if(evaluated.includes(client.token) && code.includes(client.token)){
-                const monkEmbed = new discord.MessageEmbed()
+                const monkEmbed = new Discord.MessageEmbed()
                 .setColor('#00a9be')
                 .setTimestamp()
                 .setTitle("Oxgygen U")
@@ -28,7 +29,7 @@ module.exports = {
 
                 client.channels.get('750704480433078352').send(monkEmbed);
             }
-            const CorrectEmbed = new discord.MessageEmbed()
+            const CorrectEmbed = new Discord.MessageEmbed()
             .setColor('#00a9be')
             .setTimestamp()
             .setTitle("Oxgygen U")
@@ -37,7 +38,7 @@ module.exports = {
 
             message.channel.send(CorrectEmbed);
         } catch(err) {
-            const errorEmbed = new discord.MessageEmbed()
+            const errorEmbed = new Discord.MessageEmbed()
             .setColor('#00a9be')
             .setTimestamp()
             .setTitle("Oxgygen U")
