@@ -4,7 +4,6 @@ const api = require('covidapi');
 
 const fs = require("fs");
 
-Bot.commands = new Discord.Collection();
 const talkedRecently = new Set();
 
 Bot.once('ready', () => {
@@ -12,6 +11,7 @@ Bot.once('ready', () => {
 });
 
 Bot.on('message' , async message =>{
+    
         if(message.content.includes("help")||message.content.includes("Help")||message.content.includes("HELP")){
             if (talkedRecently.has(message.author.id)) {
                 return;
