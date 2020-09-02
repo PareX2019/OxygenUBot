@@ -4,7 +4,7 @@ module.exports = {
     name: "eval",
     category: "developer",
     description: "Allows the developers to run JavaScript code.",
-    run: async (Bot, message, args) => {
+    run: async (client, message, args) => {
         if(!args[0]){
             let EmbedYes = new discord.MessageEmbed()
             .setColor('#00a9be')
@@ -18,15 +18,15 @@ module.exports = {
         let code = `(async () => {${args.join(" ")}})()`;
         try {
             let evaluated = inspect(eval(code, {depth: 0}));
-            if(evaluated.includes(Bot.token) && code.includes(Bot.token)){
+            if(evaluated.includes(client.token) && code.includes(client.token)){
                 let monkEmbed = new discord.MessageEmbed()
                 .setColor('#00a9be')
                 .setTimestamp()
                 .setTitle("Oxgygen U")
-                .addField(`Some Monkey Called ${message.author.username} Just Tried To Get ${Bot.user.username} Token.`)
+                .addField(`Some Monkey Called ${message.author.username} Just Tried To Get ${client.user.username} Token.`)
                 .addFooter(`Command Run By ${message.author.username}`,message.author.avatarURL)
 
-                return  Bot.channels.get('750704480433078352').send(monkEmbed);
+                return  client.channels.get('750704480433078352').send(monkEmbed);
             }
             let CorrectEmbed = new discord.MessageEmbed()
             .setColor('#00a9be')
