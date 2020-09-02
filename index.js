@@ -51,12 +51,18 @@ client.on('message' , async message =>{
     if(responding.includes('<@!749022439438287019>')){
         message.reply('My prefix is \`;\` just incase you forgot.')
     }
+    console.log("1st step passed");
     if(!message.content.toLowerCase().startsWith(process.env.prefix)) return;
+    console.log("step 2");
 	const args = message.content.slice(process.env.prefix.length).trim().split(/ +/g);
-	const cmd = args.shift().toLowerCase();
-	let command = client.commands.get(cmd);
-	if(!command) command = client.commands.get(client.aliases.get(cmd));
+    const cmd = args.shift().toLowerCase();
+    console.log("args/cmd set");
+    let command = client.commands.get(cmd);
+    console.log("variable naming passed");
+    if(!command) command = client.commands.get(client.aliases.get(cmd));
+    console.log("idk");
 	if(command){
+        console.log("executing error");
 		//>if(command.category === "developer" && message.author.id != 503471433415000079) return;
 		//if(command.requiredRole && !message.member.roles.cache.some(role => role.name === command.requiredRole)) return;
         command.run(client, message, args);
