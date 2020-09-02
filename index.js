@@ -65,7 +65,7 @@ client.on('message' , async message =>{
         .setColor("#00a9be")
         .addField(command.description,command.name)
         .addTimestamp()
-        .addFooter(message.author.username,message.author.avatarURL());
+      //  .addFooter(message.author.username,message.author.avatarURL());
 
         console.log(command.name.toString());
 	}
