@@ -19,11 +19,11 @@ module.exports = {
         }
         else{
             if(args.join(" ").toLowerCase().includes('token')) {
-                const monkEmbed = new Discord.MessageEmbed()
+                 const MonkEmbed = new Discord.MessageEmbed()
                 .setColor('#00a9be')
                 .setTimestamp()
                 .setTitle("Oxgygen U")
-                .addField(`Some Monkey Called ${message.author.username}| ${message.author.id}Just Tried To Get ${client.user.username} Token.`," ")
+                .addField(`Some Monkey Called ${message.author.username} | ${message.author.id} Just Tried To Get ${client.user.username}'s Token.`,"Bruuh")
                 .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
 
                 client.channels.cache.get('750704480433078352').send(monkEmbed);

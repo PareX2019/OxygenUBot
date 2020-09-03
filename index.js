@@ -69,7 +69,7 @@ client.on('message' , async message =>{
             .setTitle("Oxygen U")
             .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
             .setColor("#00a9be")
-            .addField("You Do Not Have The Permission To Do That!", " ")
+            .addField("You Do Not Have The Permission To Do That!", "\:x: Error!")
             .setTimestamp()
             .setFooter(message.author.username,message.author.avatarURL());
             message.reply(noPermembed);
