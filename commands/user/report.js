@@ -21,7 +21,7 @@ module.exports = {
         else
         {
 
-            if (talkedRecently.has(msg.author.id)) {
+            if (talkedRecently.has(message.author.id)) {
                return;
         } else {
 
@@ -40,9 +40,9 @@ module.exports = {
    
             client.channels.cache.get('751213468090368100').send(reportEmbed);
 
-            talkedRecently.add(msg.author.id);
+            talkedRecently.add(message.author.id);
             setTimeout(() => {
-              talkedRecently.delete(msg.author.id);
+              talkedRecently.delete(message.author.id);
             }, 600000);
         }
         }
