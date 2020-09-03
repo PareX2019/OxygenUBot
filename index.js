@@ -72,13 +72,15 @@ client.on('message' , async message =>{
             .addField("You Do Not Have The Permission To Do That!",true)
             .setTimestamp()
             .setFooter(message.author.username,message.author.avatarURL());
+            message.reply(noPermembed);
+            return;
         }
         command.run(client, message, args);
         const logEmbed = new Discord.MessageEmbed()
         .setTitle("Oxygen U")
         .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
         .setColor("#00a9be")
-        .addField(capitalizeFirstLetter(command.name.toString()),`**${command.desription}**`)
+        .addField(capitalizeFirstLetter(command.name.toString()),`${command.description}`)
         .setTimestamp()
         .setFooter(message.author.username,message.author.avatarURL());
         

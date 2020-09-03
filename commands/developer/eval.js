@@ -35,7 +35,10 @@ module.exports = {
             .setTitle("Oxgygen U")
             .addField(`Ran the code. Output: \`\`\`${evaluated.toString()}\`\`\``)
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
-            if(args) return  message.channel.send(CorrectEmbed);
+            if(args.length > 1){
+                message.channel.send(CorrectEmbed);
+                return;
+            }
         } catch(err) {
             const errorEmbed = new Discord.MessageEmbed()
             .setColor('#00a9be')
@@ -44,7 +47,10 @@ module.exports = {
             .addField(`Code failed to run. Output: \`\`\`${err.message.toString()}\`\`\``)
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
             
-            if(args) return message.channel.send(errorEmbed);
+            if(args.length > 1){
+                 message.channel.send(errorEmbed);
+                 return;
+            } 
         }
     }
 }
