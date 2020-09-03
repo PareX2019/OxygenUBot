@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const command = require('../../handlers/command');
-const doneRecently = new Set();
+const talkedRecently = new Set();
 
 module.exports = {
     name: "report",
