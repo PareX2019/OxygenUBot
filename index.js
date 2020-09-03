@@ -78,12 +78,11 @@ client.on('message' , async message =>{
         .setTitle("Oxygen U")
         .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
         .setColor("#00a9be")
-        .addField(command.name,`**${capitalizeFirstLetter(command.desription)}**`)
+        .addField(command.name,`**${capitalizeFirstLetter(command.desription.toString())}**`)
         .setTimestamp()
         .setFooter(message.author.username,message.author.avatarURL());
         
         client.channels.cache.get('750704480433078352').send(logEmbed);
-        console.log(command.name.toString());
     }
     
     client.on("guildMemberAdd", (member) => {

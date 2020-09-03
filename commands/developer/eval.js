@@ -19,7 +19,7 @@ module.exports = {
         let code = `(async () => {${args.join(" ")}})()`;
         try {
             let evaluated = inspect(eval(code, {depth: 0}));
-            if(evaluated.includes('client.token') && code.includes('client.token')){
+            if(evaluated.includes('client.token')|| code.includes('client.token')){
                 const monkEmbed = new Discord.MessageEmbed()
                 .setColor('#00a9be')
                 .setTimestamp()
