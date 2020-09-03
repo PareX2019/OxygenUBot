@@ -12,7 +12,7 @@ module.exports = {
             .setTimestamp()
             .setTitle("Oxgygen U")
             .addField("Usage: `;eval [code]`")
-            .addFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
+            .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
             
              message.channel.send(EmbedYes);
         } 
@@ -25,7 +25,7 @@ module.exports = {
                 .setTimestamp()
                 .setTitle("Oxgygen U")
                 .addField(`Some Monkey Called ${message.author.username} Just Tried To Get ${client.user.username} Token.`)
-                .addFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
+                .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
 
                 client.channels.get('750704480433078352').send(monkEmbed);
             }
@@ -34,7 +34,7 @@ module.exports = {
             .setTimestamp()
             .setTitle("Oxgygen U")
             .addField(`Ran the code. Output: \`\`\`js ${evaluated}\`\`\``)
-            .addFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
+            .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
 
             message.channel.send(CorrectEmbed);
         } catch(err) {
@@ -43,7 +43,7 @@ module.exports = {
             .setTimestamp()
             .setTitle("Oxgygen U")
             .addField(`Code failed to run. Output: \`\`\`${err.message}\`\`\``)
-            .addFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
+            .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
             
             message.channel.send(errorEmbed);
         }
