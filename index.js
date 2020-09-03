@@ -57,13 +57,24 @@ client.on('message' , async message =>{
 	let command = client.commands.get(cmd);
 	if(!command) command = client.commands.get(client.aliases.get(cmd));
 	if(command){
-		if(command.category === "developer" && message.author.id != 503471433415000079) return;
+
+
+        if(command.category === "developer" && message.author.id != 503471433415000079||message.author.id != 691389871079817256)
+        {
+            let noPermembed = new Discord.MessageEmbed()
+            setTitle("Oxygen U")
+            .setDescription(`Category Of Command **${command.category}**`)
+            .setColor("#00a9be")
+            .addField("You Do Not Have The Permission To Do That!",true)
+            .setTimestamp()
+            .setFooter(message.author.username,message.author.avatarURL());
+        }
         command.run(client, message, args);
         const logEmbed = new Discord.MessageEmbed()
         .setTitle("Oxygen U")
-        .setDescription(`Category Of Command ${command.category}`)
+        .setDescription(`Category Of Command **${command.category}**`)
         .setColor("#00a9be")
-        .addField(command.description,command.name)
+        .addField(command.description,`**${command.name}**`)
         .setTimestamp()
         .setFooter(message.author.username,message.author.avatarURL());
         
