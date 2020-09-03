@@ -1,5 +1,6 @@
 const {inspect} = require("util");
 const Discord = require('discord.js');
+const beautify = require("beautify");
 
 module.exports = {
     name: "eval",
@@ -10,42 +11,51 @@ module.exports = {
             const EmbedYes = new Discord.MessageEmbed()
             .setColor('#00a9be')
             .setTimestamp()
-            .setTitle("Oxgygen U")
-            .addField("Usage: `;eval [code]`")
-            .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
+            .setTitle("Oxgygen U | Eval")
+            .addField("Usage: `;eval [code]`"," ")
+            .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
             
              message.channel.send(EmbedYes);
+        return;
         } 
-        let code = `(async () => {${args.join(" ")}})()`;
-        try {
-            let evaluated = inspect(eval(code, {depth: 0}));
-            if(evaluated.includes('client.token')|| code.includes('client.token')){
+       const toEval = args.join(" ");
+       const evaluated = eval(toEval);
+
+
+            if(evaluated.includes('client.token')||evaluated.includes('token')){
                 const monkEmbed = new Discord.MessageEmbed()
                 .setColor('#00a9be')
                 .setTimestamp()
                 .setTitle("Oxgygen U")
-                .addField(`Some Monkey Called ${message.author.username} Just Tried To Get ${client.user.username} Token.`)
-                .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
+                .addField(`Some Monkey Called ${message.author.username}| ${message.author.id}Just Tried To Get ${client.user.username} Token.`," ")
+                .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
 
                 client.channels.cache.get('750704480433078352').send(monkEmbed);
+                return;
             }
+
+      try{
             const CorrectEmbed = new Discord.MessageEmbed()
-            .setColor('#00a9be')
+            .setColor('#00FF00')
             .setTimestamp()
-            .setTitle("Oxgygen U")
-            .addField(`Ran the code. Output: \`\`\`${evaluated.toString()}\`\`\``)
-            .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
+            .setTitle("Oxgygen U | Eval")
+            .addField("To Evaluate:", `\`\`\`js\n${beautify(args.join(" "), { format : "js"})}\`\`\``)
+            .addField("Evaluated:", evaluated)
+            .addField("Type of:",typeof(evaluated))
+            .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
+
             if(args.length > 1){
                 message.channel.send(CorrectEmbed);
                 return;
             }
-        } catch(err) {
+
+        }catch(err) {
             const errorEmbed = new Discord.MessageEmbed()
-            .setColor('#00a9be')
+            .setColor('#FF000')
             .setTimestamp()
-            .setTitle("Oxgygen U")
-            .addField(`Code failed to run. Output: \`\`\`${err.message.toString()}\`\`\``)
-            .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
+            .setTitle("\:x: Error! | Oxygen U | Eval")
+            .setDescription(err)
+            .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
             
             if(args.length > 1){
                  message.channel.send(errorEmbed);
