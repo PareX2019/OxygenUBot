@@ -33,7 +33,7 @@ module.exports = {
             .setColor('#00a9be')
             .setTimestamp()
             .setTitle("Oxgygen U")
-            .addField(`Ran the code. Output: \`\`\`js ${evaluated}\`\`\``)
+            .addField(`Ran the code. Output: \`\`\`${evaluated.toString()}\`\`\``)
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
 
             message.channel.send(CorrectEmbed);
@@ -42,7 +42,7 @@ module.exports = {
             .setColor('#00a9be')
             .setTimestamp()
             .setTitle("Oxgygen U")
-            .addField(`Code failed to run. Output: \`\`\`${err.message}\`\`\``)
+            .addField(`Code failed to run. Output: \`\`\`${err.message.toString()}\`\`\``)
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
             
             message.channel.send(errorEmbed);
