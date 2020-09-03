@@ -78,7 +78,7 @@ client.on('message' , async message =>{
         .setTitle("Oxygen U")
         .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
         .setColor("#00a9be")
-        .addField(command.description,`**${capitalizeFirstLetter(command.name)}**`)
+        .addField(command.name,`**${capitalizeFirstLetter(command.desription)}**`)
         .setTimestamp()
         .setFooter(message.author.username,message.author.avatarURL());
         
