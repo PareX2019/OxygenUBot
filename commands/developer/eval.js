@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const beautify = require("beautify");
+const funcs = require("./functions");
 
 module.exports = {
     name: "eval",
@@ -11,7 +12,7 @@ module.exports = {
             .setColor('#00a9be')
             .setTimestamp()
             .setTitle("Oxgygen U | Eval")
-            .addField("Usage: `;eval [code]`"," ")
+            .addField("Usage: `;eval [code]`","\:x: Error!")
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
             
              message.channel.send(EmbedYes);
