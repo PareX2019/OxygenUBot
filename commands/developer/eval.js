@@ -22,7 +22,7 @@ module.exports = {
        const evaluated = eval(toEval);
 
 
-            if(evaluated.includes('client.token')||evaluated.includes('token')){
+            if(toEval.includes('token')){
                 const monkEmbed = new Discord.MessageEmbed()
                 .setColor('#00a9be')
                 .setTimestamp()
