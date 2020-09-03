@@ -19,7 +19,7 @@ module.exports = {
         let code = `(async () => {${args.join(" ")}})()`;
         try {
             let evaluated = inspect(eval(code, {depth: 0}));
-            if(evaluated.includes(client.token) && code.includes(client.token)){
+            if(evaluated.includes('client.token') && code.includes('client.token')){
                 const monkEmbed = new Discord.MessageEmbed()
                 .setColor('#00a9be')
                 .setTimestamp()
@@ -27,7 +27,7 @@ module.exports = {
                 .addField(`Some Monkey Called ${message.author.username} Just Tried To Get ${client.user.username} Token.`)
                 .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
 
-                client.channels.get('750704480433078352').send(monkEmbed);
+                client.channels.cache.get('750704480433078352').send(monkEmbed);
             }
             const CorrectEmbed = new Discord.MessageEmbed()
             .setColor('#00a9be')
