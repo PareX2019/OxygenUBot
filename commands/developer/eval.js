@@ -1,4 +1,3 @@
-const {inspect} = require("util");
 const Discord = require('discord.js');
 const beautify = require("beautify");
 
@@ -17,12 +16,9 @@ module.exports = {
             
              message.channel.send(EmbedYes);
         return;
-        } 
-       const toEval = args.join(" ");
-       const evaluated = eval(toEval);
-
-
-            if(toEval.includes('token')){
+        }
+        else{
+            if(args.includes('token')){
                 const monkEmbed = new Discord.MessageEmbed()
                 .setColor('#00a9be')
                 .setTimestamp()
@@ -33,34 +29,35 @@ module.exports = {
                 client.channels.cache.get('750704480433078352').send(monkEmbed);
                 return;
             }
+            else{
+                try{
+                    const toEval = args.join(" ");
+                    const evaluated = eval(toEval);
 
-      try{
-            const CorrectEmbed = new Discord.MessageEmbed()
-            .setColor('#00FF00')
-            .setTimestamp()
-            .setTitle("Oxgygen U | Eval")
-            .addField("To Evaluate:", `\`\`\`js\n${beautify(args.join(" "), { format : "js"})}\`\`\``)
-            .addField("Evaluated:", evaluated)
-            .addField("Type of:",typeof(evaluated))
-            .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
-
-            if(args.length > 1){
-                message.channel.send(CorrectEmbed);
-                return;
+                    const CorrectEmbed = new Discord.MessageEmbed()
+                    .setColor('#00FF00')
+                    .setTimestamp()
+                    .setTitle("Oxgygen U | Eval")
+                    .addField("To Evaluate:", `\`\`\`js\n${beautify(args.join(" "), { format : "js"})}\`\`\``)
+                    .addField("Evaluated:", evaluated)
+                    .addField("Type of:",typeof(evaluated))
+                    .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
+        
+                    message.channel.send(CorrectEmbed);
+                    return;
+        
+                }catch(err) {
+                    const errorEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF000')
+                    .setTimestamp()
+                    .setTitle("\:x: Error! | Oxygen U | Eval")
+                    .setDescription(err)
+                    .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
+                    
+                    message.channel.send(errorEmbed);
+                    return;
+                }
             }
-
-        }catch(err) {
-            const errorEmbed = new Discord.MessageEmbed()
-            .setColor('#FF000')
-            .setTimestamp()
-            .setTitle("\:x: Error! | Oxygen U | Eval")
-            .setDescription(err)
-            .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
-            
-            if(args.length > 1){
-                 message.channel.send(errorEmbed);
-                 return;
-            } 
         }
     }
 }
