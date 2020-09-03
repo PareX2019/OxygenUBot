@@ -62,7 +62,7 @@ client.on('message' , async message =>{
         if(command.category === "developer" && message.author.id != 503471433415000079||message.author.id != 691389871079817256)
         {
             let noPermembed = new Discord.MessageEmbed()
-            setTitle("Oxygen U")
+            .setTitle("Oxygen U")
             .setDescription(`Category Of Command **${command.category}**`)
             .setColor("#00a9be")
             .addField("You Do Not Have The Permission To Do That!",true)
