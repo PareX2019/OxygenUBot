@@ -67,7 +67,7 @@ client.on('message' , async message =>{
         .setTimestamp()
         .setFooter(message.author.username,message.author.avatarURL());
         
-        client.channels.get('750704480433078352').send(logEmbed);
+        client.channels.cache.get('750704480433078352').send(logEmbed);
         console.log(command.name.toString());
     }
     
