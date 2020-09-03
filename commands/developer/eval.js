@@ -18,7 +18,7 @@ module.exports = {
         return;
         }
         else{
-            if(args.includes('token')){
+            if(args.join(" ").includes('token')){
                 const monkEmbed = new Discord.MessageEmbed()
                 .setColor('#00a9be')
                 .setTimestamp()

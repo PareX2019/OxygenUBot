@@ -83,7 +83,7 @@ client.on('message' , async message =>{
         .addField("Args:",args)
         .addField(capitalizeFirstLetter(command.name.toString()),`${command.description}`)
         .setTimestamp()
-        .setFooter(message.author.username,message.author.avatarURL());
+        .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
         
         client.channels.cache.get('750704480433078352').send(logEmbed);
     }   
