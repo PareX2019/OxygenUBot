@@ -63,7 +63,7 @@ client.on('message' , async message =>{
 	if(command){
 
 
-        if(command.category === "developer" && message.author.id != 503471433415000079||message.author.id != 691389871079817256)
+        if(command.category === "developer" && message.author.id != 503471433415000079)
         {
             let noPermembed = new Discord.MessageEmbed()
             .setTitle("Oxygen U")
