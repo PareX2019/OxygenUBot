@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const beautify = require("beautify");
-const funcs = require("./functions");
 
 module.exports = {
     name: "eval",

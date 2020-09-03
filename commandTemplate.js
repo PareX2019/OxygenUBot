@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const command = require('../../handlers/command');
-const funcs = require("./functions");
 
 module.exports = {
     name: "report",
