@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const command = require('../../handlers/command');
-const funcs = require("./functions");
 const doneRecently = new Set();
 
 module.exports = {
@@ -25,7 +24,7 @@ module.exports = {
             if (talkedRecently.has(msg.author.id)) {
                return;
         } else {
-            
+
             let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
             if(!rUser) return message.reply("Couldn't Find User!");
             let reason = args.join(" ").slice(22);

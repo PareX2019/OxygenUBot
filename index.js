@@ -3,9 +3,11 @@ const client = new Discord.Client({disableMentions: "everyone"});
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 require("./handlers/command.js")(client);
-const funcs = require("./functions");
 
 
+function capitalizeFirstLetter(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 const fs = require("fs");
 const talkedRecently = new Set();
 
@@ -65,7 +67,7 @@ client.on('message' , async message =>{
         {
             let noPermembed = new Discord.MessageEmbed()
             .setTitle("Oxygen U")
-            .setDescription(`Category Of Command **${funcs.capitalizeFirstLetter(command.category)}**`)
+            .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
             .setColor("#00a9be")
             .addField("You Do Not Have The Permission To Do That!", "\:x: Error!")
             .setTimestamp()
@@ -76,10 +78,10 @@ client.on('message' , async message =>{
         command.run(client, message, args);
         const logEmbed = new Discord.MessageEmbed()
         .setTitle("Oxygen U")
-        .setDescription(`Category Of Command **${funcs.capitalizeFirstLetter(command.category)}**`)
+        .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
         .setColor("#00a9be")
         .addField("Args:",args)
-        .addField(funcs.capitalizeFirstLetter(command.name.toString()),`${command.description}`)
+        .addField(capitalizeFirstLetter(command.name.toString()),`${command.description}`)
         .setTimestamp()
         .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
         
