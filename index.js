@@ -13,6 +13,10 @@ client.once('ready', () => {
     console.log(`${client.user.username} is now Running.`);
 });
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 client.on('message' , async message =>{
     
        if(message.author.bot) return;
@@ -63,7 +67,7 @@ client.on('message' , async message =>{
         {
             let noPermembed = new Discord.MessageEmbed()
             .setTitle("Oxygen U")
-            .setDescription(`Category Of Command **${command.category}**`)
+            .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
             .setColor("#00a9be")
             .addField("You Do Not Have The Permission To Do That!",true)
             .setTimestamp()
@@ -72,9 +76,9 @@ client.on('message' , async message =>{
         command.run(client, message, args);
         const logEmbed = new Discord.MessageEmbed()
         .setTitle("Oxygen U")
-        .setDescription(`Category Of Command **${command.category}**`)
+        .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
         .setColor("#00a9be")
-        .addField(command.description,`**${command.name}**`)
+        .addField(command.description,`**${capitalizeFirstLetter(command.name)}**`)
         .setTimestamp()
         .setFooter(message.author.username,message.author.avatarURL());
         
