@@ -11,7 +11,7 @@ module.exports = {
             .setColor('#00a9be')
             .setTimestam()
             .setTitle("Oxgygen U")
-            .addField("Usage: `~eval [code]`")
+            .addField("Usage: `;eval [code]`")
             .addFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
             
              message.channel.send(EmbedYes);

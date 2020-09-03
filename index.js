@@ -65,10 +65,32 @@ client.on('message' , async message =>{
         .setColor("#00a9be")
         .addField(command.description,command.name)
         .addTimestamp()
-      //  .addFooter(message.author.username,message.author.avatarURL());
+        .addFooter(message.author.username,message.author.avatarURL());
 
         console.log(command.name.toString());
-	}
+    }
+    
+    client.on("guildMemberAdd", (member) => {
+        try {
+            member.guild.channels.get("751153971103531148").setName(`Total Members: ${member.guild.memberCount}`);
+            member.guild.channels.get("751154024962850926").setName(`Users: ${member.guild.members.filter((m) => !m.user.bot).size}`); 
+            member.guild.channels.get("751154073524502638").setName(`Total Bots: ${member.guild.members.filter((m) => m.user.bot).size}`);
+        }
+        catch (e) {
+        Console.log(e);
+        }
+  });
+  client.on("guildMemberRemove", (member) => {
+
+    try {
+        member.guild.channels.get("751153971103531148").setName(`Total Members: ${member.guild.memberCount}`);
+        member.guild.channels.get("751154024962850926").setName(`Users: ${member.guild.members.filter((m) => !m.user.bot).size}`);
+        member.guild.channels.get("751154073524502638").setName(`Total Bots: ${member.members.filter((m) => m.user.bot).size}`);
+    }
+    catch (e) {
+    Console.log(e);
+    }
+});
     
 });
 
