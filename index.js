@@ -60,13 +60,14 @@ client.on('message' , async message =>{
 		if(command.category === "developer" && message.author.id != 503471433415000079) return;
         command.run(client, message, args);
         const logEmbed = new Discord.MessageEmbed()
-        .setTitle("Oxygen U")
-        .setDescription(`Category Of Command ${command.category}`)
-        .setColor("#00a9be")
-        .addField(command.description,command.name)
-        .addTimestamp()
-        .addFooter(message.author.username,message.author.avatarURL());
-
+        logEmbed.setTitle("Oxygen U")
+        logEmbed.setDescription(`Category Of Command ${command.category}`)
+        logEmbed.setColor("#00a9be")
+        logEmbed.addField(command.description,command.name)
+        logEmbed.addTimestamp()
+        logEmbed.addFooter(message.author.username,message.author.avatarURL());
+        
+        client.channels.get('750704480433078352').send(logEmbed);
         console.log(command.name.toString());
     }
     
