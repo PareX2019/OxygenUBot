@@ -9,7 +9,7 @@ module.exports = {
         if(!args[0]){
             const EmbedYes = new Discord.MessageEmbed()
             .setColor('#00a9be')
-            .setTimestam()
+            .setTimestamp()
             .setTitle("Oxgygen U")
             .addField("Usage: `;eval [code]`")
             .addFooter(`Command Run By ${message.author.username}`,message.author.avatarURL);
