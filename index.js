@@ -52,7 +52,7 @@ client.on('message' , async message =>{
         }
     }
     const responding = message.content.toLowerCase()
-    if(responding.includes('<@!749022439438287019>')){
+    if(responding === '<@!749022439438287019>'){
         message.reply('My prefix is \`;\` just incase you forgot.')
     }
     if(!message.content.toLowerCase().startsWith(process.env.prefix)) return;

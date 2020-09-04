@@ -14,7 +14,7 @@ module.exports = {
             .setColor('#00a9be')
             .setTimestamp()
             .setTitle(`Oxygen U | addRole`)
-            .addField(`Usage: ';$addRole [user] [role]'`,"\:x: Error!")
+            .addField(`Usage: ';addRole [user] [role]'`,"\:x: Error!")
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
 
              message.channel.send(EmbedYes);
