@@ -86,6 +86,7 @@ client.on('message' , async message =>{
             .addField(capitalizeFirstLetter(command.name.toString()),`${command.description}`)
             .setTimestamp()
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
+
             client.channels.cache.get('750704480433078352').send(logEmbed2);
             return;
         }
@@ -95,7 +96,7 @@ client.on('message' , async message =>{
         .setTitle("Oxygen U")
         .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
         .setColor("#00a9be")
-        .addField("Args:",args)
+        .addField("Args:",`${args} js is fucking retarded`)
         .addField(capitalizeFirstLetter(command.name.toString()),`${command.description}`)
         .setTimestamp()
         .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
