@@ -20,7 +20,7 @@ client.once('ready', () => {
 client.on('message' , async message =>{
     
        if(message.author.bot) return;
-        if(message.content.includes("help")||message.content.includes("Help")||message.content.includes("HELP")){
+        if(message.content.includes("help")||message.content.includes("Help")||message.content.includes("HELP") && !message.member.hasPermission("MANAGE_MEMBERS")){
             if (talkedRecently.has(message.author.id)) {
                 return;
         } else {
