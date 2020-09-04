@@ -10,8 +10,8 @@ module.exports = {
             const EmbedYes = new Discord.MessageEmbed()
             .setColor('#00a9be')
             .setTimestamp()
-            .setTitle(`Oxygen U | ${this.name}`)
-            .addField(`Usage: ';${this.name} [question]'`,`${this.description}`)
+            .setTitle(`Oxygen U | 8ball`)
+            .addField(`Usage: ';8ball [question]'`,"Returns An 8ball Output to the clients question")
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
             
              message.channel.send(EmbedYes);
