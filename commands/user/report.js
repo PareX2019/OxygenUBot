@@ -11,7 +11,7 @@ module.exports = {
             const EmbedYes = new Discord.MessageEmbed()
             .setColor('#00a9be')
             .setTimestamp()
-            .setTitle(`Oxgygen U | ${name}`)
+            .setTitle(`Oxygen U | ${name}`)
             .addField(`Usage: ';${name} [Reason]'`,"\:x: Error!")
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
             
@@ -30,7 +30,7 @@ module.exports = {
             let reason = args.join(" ").slice(22);
    
             let reportEmbed = new Discord.MessageEmbed()
-            .setDescription("Reports")
+            .setDescription("Reports | Oxygen U")
             .setColor("#00a9be")
             .addField("Reported User", `${rUser} with ID: ${rUser.id}`)
             .addField("Reported By",`${message.author} with ID: ${message.author.id}`)

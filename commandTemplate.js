@@ -10,7 +10,7 @@ module.exports = {
             const EmbedYes = new Discord.MessageEmbed()
             .setColor('#00a9be')
             .setTimestamp()
-            .setTitle(`Oxgygen U | ${name}`)
+            .setTitle(`Oxygen U | ${name}`)
             .addField(`Usage: ';${name} [question]'`,`${description}`)
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
             

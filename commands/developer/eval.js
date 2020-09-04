@@ -10,7 +10,7 @@ module.exports = {
             const EmbedYes = new Discord.MessageEmbed()
             .setColor('#00a9be')
             .setTimestamp()
-            .setTitle("Oxgygen U | Eval")
+            .setTitle("Oxygen U | Eval")
             .addField("Usage: `;eval [code]`","\:x: Error!")
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
             
@@ -22,7 +22,7 @@ module.exports = {
                  const MonkEmbed = new Discord.MessageEmbed()
                 .setColor('#00a9be')
                 .setTimestamp()
-                .setTitle("Oxgygen U")
+                .setTitle("Oxygen U")
                 .addField(`Some Monkey Called ${message.author.username} | ${message.author.id} Just Tried To Get ${client.user.username}'s Token.`,"Bruuh")
                 .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
                    
@@ -38,7 +38,7 @@ module.exports = {
                     const CorrectEmbed = new Discord.MessageEmbed()
                     .setColor('#00FF00')
                     .setTimestamp()
-                    .setTitle("Oxgygen U | Eval")
+                    .setTitle("Oxygen U | Eval")
                     .addField("To Evaluate:", `\`\`\`js\n${beautify(args.join(" "), { format : "js"})}\`\`\``)
                     .addField("Evaluated:", evaluated)
                     .addField("Type of:",typeof(evaluated))
