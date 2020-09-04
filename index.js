@@ -87,6 +87,7 @@ client.on('message' , async message =>{
             .setTimestamp()
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
             client.channels.cache.get('750704480433078352').send(logEmbed2);
+            return;
         }
         else
         {
@@ -100,6 +101,7 @@ client.on('message' , async message =>{
         .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
         
         client.channels.cache.get('750704480433078352').send(logEmbed);
+        return;
         }
     }   
 });
