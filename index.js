@@ -21,7 +21,7 @@ client.on('message' , async message =>{
     
        if(message.author.bot) return;
         if(message.content.includes("help")||message.content.includes("Help")||message.content.includes("HELP")){
-            if(!message.member.roles.cache.has('710416627409223737')||!message.member.roles.cache.has('710416627409223733')||!message.member.roles.cache.has('726754550903603241')||!message.member.roles.cache.has('710416627409223738')||!message.member.roles.cache.has('744665470615158877')||!message.member.roles.cache.has('710416627413549127')){
+            if(message.member.roles.cache.has('710416627409223737')||message.member.roles.cache.has('710416627409223733')||message.member.roles.cache.has('726754550903603241')||message.member.roles.cache.has('710416627409223738')||message.member.roles.cache.has('744665470615158877')||message.member.roles.cache.has('710416627413549127')) return;
             if (talkedRecently.has(message.author.id)) {
                 return;
         } else {
@@ -37,7 +37,6 @@ client.on('message' , async message =>{
             setTimeout(() => {
               talkedRecently.delete(message.author.id);
             }, 600000);
-        }
         }
     }
 
