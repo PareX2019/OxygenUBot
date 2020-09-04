@@ -13,12 +13,12 @@ module.exports = {
             const EmbedYes = new Discord.MessageEmbed()
             .setColor('#00a9be')
             .setTimestamp()
-            .setTitle(`Oxygen U | ${this.name}`)
-            .addField(`Usage: ';${this.name} [user] [role]'`,`${this.description}`)
+            .setTitle(`Oxygen U | removeRole`)
+            .addField(`Usage: ';removeRole [user] [role]'`,"\:x: Error!")
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
 
              message.channel.send(EmbedYes);
-        return;
+             return;
         }
         else
         {
