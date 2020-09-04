@@ -20,7 +20,8 @@ client.once('ready', () => {
 client.on('message' , async message =>{
     
        if(message.author.bot) return;
-        if(message.content.includes("help")||message.content.includes("Help")||message.content.includes("HELP") && !message.member.hasPermission("MANAGE_MEMBERS")){
+        if(message.content.includes("help")||message.content.includes("Help")||message.content.includes("HELP")){
+            if(!message.member.hasPermission("MANAGE_MEMBERS")){
             if (talkedRecently.has(message.author.id)) {
                 return;
         } else {
@@ -38,6 +39,7 @@ client.on('message' , async message =>{
             }, 600000);
         }
         }
+    }
 
     let inviteLinks = ["discord.gg","discord.com/invite","discordapp.com/invite","discord.io","discord.link","invite.gg"]
     let iploggerLinks = ["grabify.org","iplogger.com","grabify.link","iplogger.org","2no.co","iplogger.com","iplogger.ru","iplogger.ru","yip.su","yip.su","iplogger.co","iplogger.info","ipgrabber.ru<","ipgraber.ru","iplis.ru","02ip.ru","ezstat.ru"]
