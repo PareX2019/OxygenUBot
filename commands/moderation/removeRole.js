@@ -5,9 +5,9 @@ function capitalizeFirstLetter(string){
 }
 
 module.exports = {
-    name: "addRole",
+    name: "removeRole",
     category: "moderation",
-    description: "adds a role to the selected member.",
+    description: "removes a role to the selected member.",
     run: async (client, message, args) => {
         if(!args){
             const EmbedYes = new Discord.MessageEmbed()
@@ -69,27 +69,26 @@ module.exports = {
             message.reply(roleNotFound2);
             return;
          }
-         if(rUser.roles.has(gRole.id))
+         if(!rUser.roles.has(gRole.id))
          {
            let embedB = new discord.MessageEmbed()
            .setTitle("Oxygen U | addRole")
            .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
            .setColor("#FF000")
-           .addField(`${rUser.name} Already has that role!`, "\:x: Error!")
+           .addField(`${rUser.name} Doesnt Have That Role!`, "\:x: Error!")
            .setTimestamp()
            .setFooter(message.author.username,message.author.avatarURL());
-           return;
          }
          await(rUser.removeRole(gRole.id));
 
          try{
-           await  rUser.send(`You Have Been Given The Role ${gRole.name}!`)
+           await  rUser.send(`The Role ${gRole.name} was removed from you!`)
          }catch(e){
             let dmsClosed = new Discord.MessageEmbed()
             .setTitle("Oxygen U | addRole")
             .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
             .setColor("#FF000")
-            .addField(`Added The ${gRole.name} To <@${rUser.id}>, I Tried To Dm Him But His Dms Are Off \:pensive:!`, "\:x: Error!")
+            .addField(`Removed The ${gRole.name} To <@${rUser.id}>, I Tried To Dm Him But His Dms Are Off \:pensive:!`, "\:x: Error!")
             .setTimestamp()
             .setFooter(message.author.username,message.author.avatarURL());
             message.reply(dmsClosed);
