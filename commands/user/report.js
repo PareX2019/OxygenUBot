@@ -11,8 +11,8 @@ module.exports = {
             const EmbedYes = new Discord.MessageEmbed()
             .setColor('#00a9be')
             .setTimestamp()
-            .setTitle(`Oxygen U | ${name}`)
-            .addField(`Usage: ';${name} [Reason]'`,"\:x: Error!")
+            .setTitle(`Oxygen U | ${this.name}`)
+            .addField(`Usage: ';${this.name} [Reason]'`,"\:x: Error!")
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
             
              message.channel.send(EmbedYes);
