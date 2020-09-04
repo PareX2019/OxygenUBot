@@ -2,16 +2,16 @@ const Discord = require('discord.js');
 const command = require('../../handlers/command');
 
 module.exports = {
-    name: "report",
+    name: "8ball",
     category: "user",
-    description: "Allows the user client to report a discord member to the staff members.",
+    description: "Returns An 8ball Output to the clients question",
     run: async (client, message, args) => {
         if(!args[0]){
             const EmbedYes = new Discord.MessageEmbed()
             .setColor('#00a9be')
             .setTimestamp()
             .setTitle(`Oxgygen U | ${name}`)
-            .addField("Usage: `;eval [code]`"," ")
+            .addField(`Usage: ';${name} [question]'`,`${description}`)
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
             
              message.channel.send(EmbedYes);
