@@ -68,7 +68,7 @@ client.on('message' , async message =>{
             let noPermembed = new Discord.MessageEmbed()
             .setTitle("Oxygen U")
             .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
-            .setColor("#00a9be")
+            .setColor("#FF000")
             .addField("You Do Not Have The Permission To Do That!", "\:x: Error!")
             .setTimestamp()
             .setFooter(message.author.username,message.author.avatarURL());
