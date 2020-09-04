@@ -10,7 +10,7 @@ module.exports = {
             .setColor('#00a9be')
             .setTimestamp()
             .setTitle(`Oxygen U | Ping`)
-            .addField("Pong!")
+            .addField("Answer:","Pong!")
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL())
              message.channel.send(EmbedYes);
         return;

@@ -76,34 +76,18 @@ client.on('message' , async message =>{
             message.reply(noPermembed);
             return;
         }
-        command.run(client, message, args);
-        if(!args){
-            const logEmbed2 = new Discord.MessageEmbed()
-            .setTitle("Oxygen U")
-            .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
-            .setColor("#00a9be")
-            .addField("Args:","No Args Provided.")
-            .addField(capitalizeFirstLetter(command.name.toString()),`${command.description}`)
-            .setTimestamp()
-            .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
-
-            client.channels.cache.get('750704480433078352').send(logEmbed2);
-            return;
-        }
-        else
-        {
+        command.run(client, message, args)
         const logEmbed = new Discord.MessageEmbed()
         .setTitle("Oxygen U")
         .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
         .setColor("#00a9be")
-        .addField("Args:",`${args} js is fucking retarded`)
+        .addField("Args:",`'${args}'`)
         .addField(capitalizeFirstLetter(command.name.toString()),`${command.description}`)
         .setTimestamp()
         .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
         
         client.channels.cache.get('750704480433078352').send(logEmbed);
         return;
-        }
     }   
 });
 
