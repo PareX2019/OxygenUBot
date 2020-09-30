@@ -3,10 +3,11 @@ const command = require('../../handlers/command');
 
 module.exports = {
     name: "ping",
-    category: "moderation",
-    description: "Returns pong",
+    category: "user",
+    description: "Returns pong with latency.",
     run: async (client, message, args) => {
-            const EmbedYes = new Discord.MessageEmbed()
+             let o = new Date().getTime();
+             const EmbedYes = new Discord.MessageEmbed()
             .setColor('#00a9be')
             .setTimestamp()
             .setTitle(`Oxygen U | Ping`)

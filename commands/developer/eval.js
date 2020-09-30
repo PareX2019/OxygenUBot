@@ -26,7 +26,7 @@ module.exports = {
                 .addField(`Some Monkey Called ${message.author.username} | ${message.author.id} Just Tried To Get ${client.user.username}'s Token.`,"Bruuh")
                 .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
                    
-                client.channels.cache.get('750704480433078352').send(MonkEmbed);
+                client.channels.cache.find(channel => channel.name === "oxygen-u-logs").send(MonkEmbed);
                 message.channel.send(`${message.author}, Dont Try Getting The Bot's Token!`);
                 return;
             }
