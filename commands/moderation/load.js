@@ -29,6 +29,7 @@ module.exports = {
 
                 setTimeout(function(){
                     let channel = message.guild.channels.cache.find(channel => channel.name === "support" && channel.type === 'text')
+                    channel.bulkDelete(100);
                     let bigEmbed = new Discord.MessageEmbed()
                     .setTitle("Ticket System")
                     .setDescription("React With '🎫' Below To Create A Ticket To Get Support To Solve Your Problem!")
@@ -36,6 +37,14 @@ module.exports = {
                     .setColor("00ff00")
                     channel.send(bigEmbed).then( embed =>{
                         embed.react("🎫");
+                    })
+                    let channel2 = message.guild.channels.cache.find(channel => channel.name === "verify" && channel.type === 'text')
+                    channel2.bulkDelete(100);
+                    let verificationEmbed = new Discord.MessageEmbed()
+                    .setTitle("Oxygen U")
+                    .setDescription("By Reacting With 👍 You Will Be Given Acess To Oxygen U's Amazing Server!")
+                    channel2.send(verificationEmbed).then(embed =>{
+                        embed.react("👍");
                     })
                 },20000);
 

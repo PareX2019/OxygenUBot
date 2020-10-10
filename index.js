@@ -6,7 +6,11 @@ require("./handlers/command.js")(client);
 const config = require('./config.json');
 const backup = require("discord-backup");
 const beautify = require('beautify');
-
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
+const fs = require('fs').promises;
+const dom = new JSDOM();
+const document = dom.window.document;
 
 function capitalizeFirstLetter(string){
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -32,8 +36,6 @@ client.once('ready', () => {
     console.log('----------------------------------------------------------');
 
         client.user.setActivity("Over Oxygen U", { type: "WATCHING"});
-
-
 });
 
 client.on('message' , async message =>{
@@ -117,10 +119,19 @@ client.on('messageReactionAdd', async (reaction,user) =>{
     if(user.bot) return;
 
        const supID = client.channels.cache.find(channel => channel.name === "support" && channel.type == 'text').id.toString();
+
+
+
            if(reaction.message.channel.id === supID && reaction.emoji.name == '🎫'){
+               let channelName = `ticket-${user.username.toLocaleLowerCase()}`;
+           if(client.channels.cache.find(channel => channel.name === channelName && channel.type == 'text')) return user.send("You Already Have Created A Ticket!");
+
             reaction.users.remove(user);
+
             const role = reaction.message.guild.roles.cache.find(r=> r.name === "Support");
+
             let category = reaction.message.guild.channels.cache.find(BIG=> BIG.name === "Tickets");
+
             reaction.message.guild.channels.create(`ticket-${user.username}`, {
                 permissionOverwrites: [
                     {
@@ -169,22 +180,92 @@ client.on('messageReactionAdd', async (reaction,user) =>{
            reaction.message.channel.send(yesNo).then(msg =>{
                msg.react("✅")
                msg.react("🚫")
-           });
+           } );
         }
         if(reaction.emoji.name === "✅" && reaction.message.channel.name.toString().includes("ticket"))
         {
-            reaction.message.channel.fetch().then(messages => {
-                console.log(`${messages.size}`);
-                messages.toString().forEach(msg => {
-                    console.log(`[${moment(msg.createdTimestamp).format("DD/MM/YYYY - hh:mm:ss a").replace("pm", "PM").replace("am", "AM")}] ` +
-                    `[${msg.author.username.toString()}]` + ": " + msg.content);
+            let messageCollection = new Discord.Collection();
+            let channelMessages = await reaction.message.channel.messages.fetch({
+                limit: 100
+            }).catch(err => console.log(err));
+    
+            messageCollection = messageCollection.concat(channelMessages);
+    
+            while(channelMessages.size === 100) {
+                let lastMessageId = channelMessages.lastKey();
+                channelMessages = await reaction.message.channel.messages.fetch({ limit: 100, before: lastMessageId }).catch(err => console.log(err));
+                if(channelMessages)
+                    messageCollection = messageCollection.concat(channelMessages);
+            }
+            let msgs = messageCollection.array().reverse();
+            let data = await fs.readFile('./template.html', 'utf8').catch(err => console.log(err));
+            if(data) {
+                await fs.writeFile(`ticket-${user.username}-transcript.html`, data).catch(err => console.log(err));
+                let guildElement = document.createElement('b');
+                let guildText = document.createTextNode(reaction.message.guild.name);
+                let guildImg = document.createElement('img');
+                guildImg.setAttribute('src', reaction.message.guild.iconURL());
+                guildImg.className = "serverIcon";
+                guildImg.setAttribute('width', '150');
+                guildElement.appendChild(guildImg);
+                guildElement.appendChild(guildText);
+                await fs.appendFile(`ticket-${user.username}-transcript.html`, guildElement.outerHTML).catch(err => console.log(err));
+    
+                msgs.forEach(async msg => {
+                    let parentContainer = document.createElement("div");
+                    parentContainer.className = "parent-container";
+    
+                    let avatarDiv = document.createElement("div");
+                    avatarDiv.className = "avatar-container";
+                    let img = document.createElement('img');
+                    img.setAttribute('src', msg.author.avatarURL());
+                    img.className = "avatar";
+                    avatarDiv.appendChild(img);
+    
+                    parentContainer.appendChild(avatarDiv);
+    
+                    let messageContainer = document.createElement('div');
+                    messageContainer.className = "message-container";
+    
+                    let nameElement = document.createElement("span");
+                    let name = document.createTextNode(msg.author.tag + " " + msg.createdAt.toDateString() + " " + msg.createdAt.toLocaleTimeString() + " EST");
+                    nameElement.appendChild(name);
+                    messageContainer.append(nameElement);
+    
+                    if(msg.content.startsWith("```")) {
+                        let m = msg.content.replace(/```/g, "");
+                        let codeNode = document.createElement("code");
+                        let textNode =  document.createTextNode(m);
+                        codeNode.appendChild(textNode);
+                        messageContainer.appendChild(codeNode);
+                    }
+                    else {
+                        let msgNode = document.createElement('span');
+                        let textNode = document.createTextNode(msg.content);
+                        msgNode.append(textNode);
+                        messageContainer.appendChild(msgNode);
+                    }
+                    parentContainer.appendChild(messageContainer);
+                    await fs.appendFile(`ticket-${user.username}-transcript.html`, parentContainer.outerHTML).catch(err => console.log(err));
                 });
-        
-            });
+        }
+        let logs = new Discord.MessageEmbed()
+        .setDescription(`Ticket For ${user.tag}`)
+        .setTitle(`Oxygen U Ticket System| Closed Ticket`)
+        .attachFiles(`./ticket-${user.username}-transcript.html`)
+        .setColor("00a9be")
+        reaction.message.guild.channels.cache.find(channel => channel.name === "oxygen-u-logs").send(logs);
             await reaction.message.channel.delete();
+           await fs.unlink(`./ticket-${user.username}-transcript.html`)
         }
         if(reaction.emoji.name === "🚫" && reaction.message.channel.name.toString().includes("ticket")){
           await reaction.message.delete();
+        }
+        let channel2 = reaction.message.guild.channels.cache.find(channel => channel.name === "verify" && channel.type === 'text').id.toString()
+        if(reaction.emoji.name === "👍" && reaction.message.channel.id === channel2){
+            const role = reaction.message.guild.roles.cache.find(r=> r.name === "Member");
+            await reaction.member.roles.add(role.id)
+            reaction.users.remove(user)
         }
 });
 
