@@ -6,6 +6,8 @@ module.exports = {
     name: "report",
     category: "user",
     description: "Allows the user client to report a discord member to the staff members.",
+    permission: "SEND_MESSAGES",
+    usage: ";report [user] [reason]",
     run: async (client, message, args) => {
         if(!args[0]){
             const EmbedYes = new Discord.MessageEmbed()
@@ -37,7 +39,7 @@ module.exports = {
             .addField("Reported By",`${message.author} with ID: ${message.author.id}`)
             .addField("Channel", message.channel)
             .addField("Time",message.createdAt)
-            .addField("MessageID",message.url)
+            .addField("MessageLink",message.url)
             .addField("Reason", reason)
            message.reply("Sent Your Report, Thank You For Your Feedback!");
             client.channels.cache.find(channel => channel.name === "reports").send(reportEmbed);

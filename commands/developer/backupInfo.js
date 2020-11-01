@@ -5,8 +5,10 @@ const backup = require('discord-backup');
 
 module.exports = {
     name: "info",
-    category: "moderation",
+    category: "developer",
     description: "Returns BackUp Info",
+    permission: "SEND_MESSAGES",
+    usage: ";info [BACKUPID]",
     run: async (client, message, args) => {
        if(args[0])
        {
@@ -29,7 +31,7 @@ module.exports = {
     }
     else
     {
-        let rawdata = fs.readFileSync("./commands/moderation/backupID.json")
+        let rawdata = fs.readFileSync("./commands/developer/backupID.json")
         let backupData = JSON.parse(rawdata);
         let backupID = backupData.backupID.toString();
         backup.fetch(backupID).then((backupInfos) => {

@@ -3,8 +3,10 @@ const command = require('../../handlers/command');
 
 module.exports = {
     name: "close",
-    category: "user",
+    category: "utility",
     description: "Closes The Ticket Its Written In",
+    usage: ";close",
+    permission: "SEND_MESSAGES",
     run: async (client, message, args) => {
             if(message.channel.name.toString().includes("ticket"))
             {
@@ -15,7 +17,6 @@ module.exports = {
                msg.react("✅")
                msg.react("🚫")
            });
-           return;
             }
             else{
                 await message.delete();

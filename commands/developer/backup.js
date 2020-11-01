@@ -6,12 +6,15 @@ const path = require('path');
 
 module.exports = {
     name: "backup",
-    category: "moderation",
+    category: "developer",
     description: "Back Ups The Server",
+    permission: "SEND_MESSAGES",
+    usage: ";backup",
     run: async (client, message, args) => {
         if(!message.member.hasPermission("ADMINISTRATOR")){
             return message.channel.send(":x: | You must be an administrator of this server to request a backup!");
         }
+        message.delete();
         backup.create(message.guild, {
             jsonBeautify: true
         }).then((backupData) => {
@@ -20,9 +23,7 @@ module.exports = {
                backupID: backupData.id
             };
             fs.writeFileSync(path.resolve(__dirname, 'backupID.json'), JSON.stringify(data));
-            message.author.send(`The backup has been created! To load it, type this command on the server of your choice: ;loadBackup ${backupData.id} or just write ;loadBackup and it should automatically load the latest backup`);
             message.reply(":white_check_mark: Backup successfully created.");
         });
-        return;
     }
 }

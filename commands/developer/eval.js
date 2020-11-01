@@ -5,6 +5,8 @@ module.exports = {
     name: "eval",
     category: "developer",
     description: "Allows the developers to run JavaScript code.",
+    permission: "SEND_MESSAGES",
+    usage: ";eval [code]",
     run: async (client, message, args) => {
         if(!args[0]){
             const EmbedYes = new Discord.MessageEmbed()
@@ -14,8 +16,7 @@ module.exports = {
             .addField("Usage: `;eval [code]`","\:x: Error!")
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
             
-             message.channel.send(EmbedYes);
-        return;
+            return  message.channel.send(EmbedYes);
         }
         else{
             if(args.join(" ").toLowerCase().includes('token')) {

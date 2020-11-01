@@ -6,6 +6,8 @@ module.exports = {
     name: "reportBug",
     category: "user",
     description: "Allows the user client to report a Bug to the Developers",
+    permission: "SEND_MESSAGES",
+    usage: ";reportBug  [bug]",
     run: async (client, message, args) => {
        
         if(!args[0]){
@@ -22,7 +24,7 @@ module.exports = {
         else
         {
         if (talkedRecently.has(message.author.id)) {
-               message.author.send("You Already Used This Command Please Wait 10m To Use This Again!");
+               message.author.send("You Already Used This Command Please Wait 10m To Use This Again!❌");
         } 
         else 
         {
@@ -35,7 +37,7 @@ module.exports = {
             .addField("Time",message.createdAt)
             .addField("MessageID",message.url)
             .addField("Bug", reason)
-            message.reply("Sent Your Report, Thank You For Your Feedback!");
+            message.reply("Sent Your Report, Thank You For Your Feedback!✅");
             client.channels.cache.find(channel => channel.name === "bugs").send(reportEmbed);
 
             talkedRecently.add(message.author.id);

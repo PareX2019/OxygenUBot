@@ -77,46 +77,60 @@ client.on('message' , async message =>{
             message.author.send(noPermembed);
             return;
         }
+
+
+        if(!message.member.permissions.has(command.permission.toString())){
+            let noPermEmbed = new Discord.MessageEmbed()
+            .setTitle("Oxygen U")
+            .setDescription(":x:Missing Permissions!" + ` You Need ${command.permission.toString()} to use this command!`)
+            .setColor("#00000")
+            .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL())
+            return message.reply(noPermEmbed).then(msg =>{
+                msg.delete({timeout: 7000})
+                message.delete({timeout: 7000})
+             });
+        }
         command.run(client, message, args)
-        
-        
-        if(args[0])
-        {
-            const logEmbed = new Discord.MessageEmbed()
-        .setTitle("Oxygen U")
-        .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
-        .setColor("#00a9be")
-        .addField("Args:",`${args}`)
-        .addField(capitalizeFirstLetter(command.name.toString()),`${command.description}`)
-        .setTimestamp()
-        .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
-        client.channels.cache.find(channel => channel.name === "oxygen-u-logs").send(logEmbed);
-            return;
-        }
-        else
-        {
-            const logEmbed = new Discord.MessageEmbed()
-        .setTitle("Oxygen U")
-        .setDescription(`Category Of Command **${capitalizeFirstLetter(command.category)}**`)
-        .setColor("#00a9be")
-        .addField("Args:",'No Args Provided!')
-        .addField(capitalizeFirstLetter(command.name.toString()),`${command.description}`)
-        .setTimestamp()
-        .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL());
-              client.channels.cache.find(channel => channel.name === "oxygen-u-logs").send(logEmbed);
-              return;
-        }
-        return;
     }
 });
 
 
+client.on("guildMemberAdd", async (member) =>{
+    member.guild.channels.cache.find(c => c.name ==="welcome-bye" && c.type=="text").send(`<@${member.id}> has just joined ${member.guild.name}. ✅`)
+    let embed = new Discord.MessageEmbed()
+    .setTitle("Oxygen U")
+    .setDescription("Please Verify In The Verification Channel")
+    .setColor("#00000")
+    .setFooter(member.user.tag,member.user.avatarURL())
+    const role = message.guild.roles.cache.find(r=> r.name === "Member");
+    member.roles.add(role.id)
+    await member.send(embed)
+})
+
+client.on('guildMemberRemove', async member =>{
+    member.guild.channels.cache.find(c => c.name ==="welcome-bye" && c.type=="text").send(`${member.displayName.toString()} has just left ${member.guild.name}. ❌`)
+})
 
 client.on('messageReactionAdd', async (reaction,user) =>{
     if(user.partial) await user.fetch();
     if(reaction.partial) await reaction.fetch();
     if(reaction.message.partial) await reaction.message.fetch();
     if(user.bot) return;
+
+    let channel2 = reaction.message.guild.channels.cache.find(channel => channel.name === "verify" && channel.type === 'text').id.toString()
+    if(reaction.emoji.name === "👍" && reaction.message.channel.id === channel2){
+
+        reaction.users.remove(user)
+        const role = reaction.message.guild.roles.cache.find(r=> r.name === "Member");
+        await reaction.message.guild.members.cache.find(member => member.id === user.id).roles.add(role.id.toString())
+        let embed  = new Discord.MessageEmbed()
+        .setTitle("Oxygen U ")
+        .setDescription("You Have Been Verified!")
+        .setColor("#00000")
+        .setFooter(user.tag,user.avatarURL());
+        user.send(embed);
+        return;
+    }
 
        const supID = client.channels.cache.find(channel => channel.name === "support" && channel.type == 'text').id.toString();
 
@@ -260,12 +274,6 @@ client.on('messageReactionAdd', async (reaction,user) =>{
         }
         if(reaction.emoji.name === "🚫" && reaction.message.channel.name.toString().includes("ticket")){
           await reaction.message.delete();
-        }
-        let channel2 = reaction.message.guild.channels.cache.find(channel => channel.name === "verify" && channel.type === 'text').id.toString()
-        if(reaction.emoji.name === "👍" && reaction.message.channel.id === channel2){
-            const role = reaction.message.guild.roles.cache.find(r=> r.name === "Member");
-            await reaction.member.roles.add(role.id)
-            reaction.users.remove(user)
         }
 });
 
