@@ -39,8 +39,9 @@ client.once('ready', () => {
 });
 
 client.on('message' , async message =>{
-    
+    if(!message.guild.id === config.guildID) return;
        if(message.author.bot) return;
+    
     let inviteLinks = ["discord.gg","discord.com/invite","discordapp.com/invite","discord.io","discord.link","invite.gg"]
     let iploggerLinks = ["grabify.org","iplogger.com","grabify.link","iplogger.org","2no.co","iplogger.com","iplogger.ru","iplogger.ru","yip.su","yip.su","iplogger.co","iplogger.info","ipgrabber.ru<","ipgraber.ru","iplis.ru","02ip.ru","ezstat.ru"]
     if(!message.member.hasPermission("VIEW_AUDIT_LOG")){
