@@ -121,8 +121,10 @@ client.on('messageReactionAdd', async (reaction,user) =>{
     if(reaction.emoji.name === "👍" && reaction.message.channel.id === channel2){
 
         reaction.users.remove(user)
-        const role = reaction.message.guild.roles.cache.find(r=> r.name === "Member");
-        await reaction.message.guild.members.cache.find(member => member.id === user.id).roles.add(role.id.toString())
+        const role = reaction.message.guild.roles.cache.find(r=> r.name === "Members");
+        const guild = reaction.message.guild;
+        const memberWhoReacted = guild.members.cache.find(member => member.id === user.id);
+        await memberWhoReacted.roles.add(role.id)
         let embed  = new Discord.MessageEmbed()
         .setTitle("Oxygen U ")
         .setDescription("You Have Been Verified!")
