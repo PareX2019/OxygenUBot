@@ -96,19 +96,17 @@ client.on('message' , async message =>{
 
 
 client.on("guildMemberAdd", async (member) =>{
-    member.guild.channels.cache.find(c => c.name ==="welcome-bye" && c.type=="text").send(`<@${member.id}> has just joined ${member.guild.name}. ✅`)
+     member.guild.channels.cache.find(c => c.name ==="welcome" && c.type=="text").send(`<@${member.id}> has just joined ${member.guild.name}. ✅`)
     let embed = new Discord.MessageEmbed()
     .setTitle("Oxygen U")
     .setDescription("Please Verify In The Verification Channel")
     .setColor("#00000")
     .setFooter(member.user.tag,member.user.avatarURL())
-    const role = message.guild.roles.cache.find(r=> r.name === "Member");
-    member.roles.add(role.id)
     await member.send(embed)
 })
 
 client.on('guildMemberRemove', async member =>{
-    member.guild.channels.cache.find(c => c.name ==="welcome-bye" && c.type=="text").send(`${member.displayName.toString()} has just left ${member.guild.name}. ❌`)
+    member.guild.channels.cache.find(c => c.name ==="bye" && c.type=="text").send(`${member.displayName.toString()} has just left ${member.guild.name}. ❌`)
 })
 
 client.on('messageReactionAdd', async (reaction,user) =>{
@@ -134,7 +132,7 @@ client.on('messageReactionAdd', async (reaction,user) =>{
         return;
     }
 
-       const supID = client.channels.cache.find(channel => channel.name === "support" && channel.type == 'text').id.toString();
+       const supID = client.channels.cache.find(channel => channel.name === "support-system" && channel.type == 'text').id.toString();
 
 
 
@@ -269,8 +267,9 @@ client.on('messageReactionAdd', async (reaction,user) =>{
         .setDescription(`Ticket For ${user.tag}`)
         .setTitle(`Oxygen U Ticket System| Closed Ticket`)
         .attachFiles(`./ticket-${user.username}-transcript.html`)
+        
         .setColor("00a9be")
-        reaction.message.guild.channels.cache.find(channel => channel.name === "oxygen-u-logs").send(logs);
+        reaction.message.guild.channels.cache.find(channel => channel.name === "support-logs").send(logs);
             await reaction.message.channel.delete();
            await fs.unlink(`./ticket-${user.username}-transcript.html`)
         }
