@@ -39,6 +39,7 @@ client.once('ready', () => {
 });
 
 client.on('message' , async message =>{
+    
     if(!message.guild.id === config.guildID) return;
        if(message.author.bot) return;
     
@@ -139,9 +140,10 @@ client.on('messageReactionAdd', async (reaction,user) =>{
 
            if(reaction.message.channel.id === supID && reaction.emoji.name == '🎫'){
                let channelName = `ticket-${user.username.toLocaleLowerCase()}`;
+               reaction.users.remove(user);
            if(client.channels.cache.find(channel => channel.name === channelName && channel.type == 'text')) return user.send("You Already Have Created A Ticket!");
 
-            reaction.users.remove(user);
+          
 
             const role = reaction.message.guild.roles.cache.find(r=> r.name === "Support");
 
@@ -278,5 +280,7 @@ client.on('messageReactionAdd', async (reaction,user) =>{
           await reaction.message.delete();
         }
 });
+
+
 
 client.login(config.token);

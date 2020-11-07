@@ -22,10 +22,10 @@ module.exports = {
         else
         {
          if(!args[2]) return message.reply("Please Ask  An Actual Question!");
-         let replies = ["No.","Yes.","Not Sure.","Maybe Not","Maybe","Possibly","Hell To The Yes","Hell Yeah","I dont know, All I Know Is Tropax Best Editor.","Ask Again Later To Lazy Rn","As I see it, yes.","Better not tell you now.","Cannot predict now.","Concentrate and ask again.",
+         let replies = ["No.","Yes.","Not Sure.","Maybe Not","Maybe","Possibly","Hell To The Yes","Hell Yeah","I dont know, All I Know Is That Oxygen U > All.","Ask Again Later To Lazy Rn","As I see it, yes.","Better not tell you now.","Cannot predict now.","Concentrate and ask again.",
         "Dont count on it.","It is certan","It is decidely so."];
         let result = Math.floor((Math.random() * replies.length))
-        let question = args.slice(1).join(" ")
+        let question = args.slice(0).join(" ")
 
         let eightBall = new Discord.MessageEmbed()
         .setColor('#082fba')
