@@ -9,12 +9,11 @@ module.exports = {
     usage: ";ping",
     permission: "SEND_MESSAGES",
     run: async (client, message, args) => {
-             let o = new Date().getTime();
              const EmbedYes = new Discord.MessageEmbed()
             .setColor('#00a9be')
             .setTimestamp()
             .setTitle(`Oxygen U | Ping`)
-            .addField("Answer:",`Pong!- (${new Date().getTime() - o}ms)`)
+            .addField("Answer:",`Latency: ${Date.now() - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`)
             .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL())
              message.channel.send(EmbedYes);
     }

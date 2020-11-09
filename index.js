@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-const client = new Discord.Client({partials: ["CHANNEL","REACTION","MESSAGE"]});
+const client = new Discord.Client({partials: ["CHANNEL","REACTION","MESSAGE"]} , {disableMentions: true});
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 require("./handlers/command.js")(client);
@@ -7,6 +7,7 @@ const config = require('./config.json');
 const backup = require("discord-backup");
 const beautify = require('beautify');
 const jsdom = require('jsdom');
+const ms = require("ms");
 const { JSDOM } = jsdom;
 const fs = require('fs').promises;
 const dom = new JSDOM();
@@ -25,23 +26,21 @@ client.once('ready', () => {
     let minutes = date_ob.getMinutes();
     let seconds = date_ob.getSeconds();
     let o = new Date().getTime();
-    console.log('----------------------------------------------------------');
-    console.log('Connected to Discord via the token successfully.✅');
     console.log(`Username: ${client.user.tag}`);
     console.log(`User ID: ${client.user.id}`);
     console.log(`Prefix: ${config.prefix}`);
     console.log(`Started At: ${year}-${month}-${date}|${hours}:${minutes}:${seconds}✅`)
     console.log(`Running on Discord API version ${Discord.version}✅`);
     console.log(`Done At ${new Date().getTime() - o}ms`)
-    console.log('----------------------------------------------------------');
+  
+  
 
-        client.user.setActivity("Over Oxygen U", { type: "WATCHING"});
+        client.user.setActivity("Over Oxygen U | ;help", { type: "WATCHING"});
 });
 
 client.on('message' , async message =>{
-    
-    if(!message.guild.id === config.guildID) return;
-       if(message.author.bot) return;
+    if(message.guild.id.toString() != config.guildID.toString()) return;   
+    if(message.author.bot) return;
     
     let inviteLinks = ["discord.gg","discord.com/invite","discordapp.com/invite","discord.io","discord.link","invite.gg"]
     let iploggerLinks = ["grabify.org","iplogger.com","grabify.link","iplogger.org","2no.co","iplogger.com","iplogger.ru","iplogger.ru","yip.su","yip.su","iplogger.co","iplogger.info","ipgrabber.ru<","ipgraber.ru","iplis.ru","02ip.ru","ezstat.ru"]
@@ -52,7 +51,7 @@ client.on('message' , async message =>{
         }
         if(iploggerLinks.some(word => message.content.toLowerCase().includes(word))) {
             await message.delete()
-            return message.guild.members.cache.get(message.author.user.id).ban('Posting IP Loggers thanks to masterzz sexy auto mod they just got banned.(spoonfed me yes)')
+            return message.guild.members.cache.get(message.author.user.id).ban('Posting IP Loggers thanks to masterzz sexy auto mod they just got banned.')
         }
     }
     const responding = message.content.toLowerCase()
