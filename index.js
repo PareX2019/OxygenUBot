@@ -217,7 +217,7 @@ client.on('messageReactionAdd', async (reaction,user) =>{
             let msgs = messageCollection.array().reverse();
             let data = await fs.readFile('./template.html', 'utf8').catch(err => console.log(err));
             if(data) {
-                await fs.writeFile(`ticket-${user.username}-transcript.html`, data).catch(err => console.log(err));
+                await fs.writeFile(`${reaction.message.channel.name}-transcript.html`, data).catch(err => console.log(err));
                 let guildElement = document.createElement('b');
                 let guildText = document.createTextNode(reaction.message.guild.name);
                 let guildImg = document.createElement('img');
@@ -226,7 +226,7 @@ client.on('messageReactionAdd', async (reaction,user) =>{
                 guildImg.setAttribute('width', '150');
                 guildElement.appendChild(guildImg);
                 guildElement.appendChild(guildText);
-                await fs.appendFile(`ticket-${user.username}-transcript.html`, guildElement.outerHTML).catch(err => console.log(err));
+                await fs.appendFile(`${reaction.message.channel.name}-transcript.html`, guildElement.outerHTML).catch(err => console.log(err));
     
                 msgs.forEach(async msg => {
                     let parentContainer = document.createElement("div");
@@ -263,18 +263,18 @@ client.on('messageReactionAdd', async (reaction,user) =>{
                         messageContainer.appendChild(msgNode);
                     }
                     parentContainer.appendChild(messageContainer);
-                    await fs.appendFile(`ticket-${user.username}-transcript.html`, parentContainer.outerHTML).catch(err => console.log(err));
+                    await fs.appendFile(`${reaction.message.channel.name}-transcript.html`, parentContainer.outerHTML).catch(err => console.log(err));
                 });
         }
         let logs = new Discord.MessageEmbed()
         .setDescription(`Ticket For ${user.tag}`)
         .setTitle(`Oxygen U Ticket System| Closed Ticket`)
-        .attachFiles(`./ticket-${user.username}-transcript.html`)
+        .attachFiles(`${reaction.message.channel.name}-transcript.html`)
         
         .setColor("00a9be")
         reaction.message.guild.channels.cache.find(channel => channel.name === "support-logs").send(logs);
             await reaction.message.channel.delete();
-           await fs.unlink(`./ticket-${user.username}-transcript.html`)
+           await fs.unlink(`${reaction.message.channel.name}-transcript.html`)
         }
         if(reaction.emoji.name === "🚫" && reaction.message.channel.name.toString().includes("ticket")){
           await reaction.message.delete();
