@@ -185,9 +185,10 @@ client.on('messageReactionAdd', async (reaction,user) =>{
                     em.react("❌")
                 })
             })
-
-            
         }
+
+
+
         if(reaction.emoji.name === "❌" && reaction.message.channel.name.toString().includes("ticket"))
         {
             reaction.users.remove(user.id);
@@ -198,7 +199,8 @@ client.on('messageReactionAdd', async (reaction,user) =>{
                msg.react("✅")
                msg.react("🚫")
            } );
-        }
+        }// closing embed verification
+
         if(reaction.emoji.name === "✅" && reaction.message.channel.name.toString().includes("ticket"))
         {
             let messageCollection = new Discord.Collection();
@@ -276,9 +278,10 @@ client.on('messageReactionAdd', async (reaction,user) =>{
             await reaction.message.channel.delete();
            await fs.unlink(`${reaction.message.channel.name}-transcript.html`)
         }
+
         if(reaction.emoji.name === "🚫" && reaction.message.channel.name.toString().includes("ticket")){
           await reaction.message.delete();
-        }
+        }//delete because declined embed
 });
 
 
