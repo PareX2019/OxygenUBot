@@ -27,7 +27,7 @@ module.exports = {
         .setAuthor(`${message.guild.name} ModLogs`,message.guild.iconURL())
         .addField("Moderation:","ban")
         .addField("Moderator:",message.author.username)
-        .addField("Banned Person:",member.user.tag)
+        .addField("Banned Person:",targetMember.id)
         .addField("Reason:", reason.toString())
         .addField("Date:",message.createdAt)
         .addField("MessageLink:",message.url)

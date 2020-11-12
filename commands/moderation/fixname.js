@@ -29,7 +29,7 @@ module.exports = {
         .setAuthor(`${message.guild.name} ModLogs`,message.guild.iconURL())
         .addField("Moderation:","fixname")
         .addField("Moderator:",message.author.username)
-        .addField("Fixed Person:",member.user.tag)
+        .addField("Fixed Person:",target.id)
         .addField("Name:", `I❤OXY#${numba}`)
         .addField("Date:",message.createdAt)
         .addField("MessageLink:",message.url)
