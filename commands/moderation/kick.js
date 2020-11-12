@@ -11,7 +11,7 @@ module.exports = {
     run: async (client, message, args) => {
       if(args[0]){
      
-       const target = message.mentions.first()
+       const target = message.mentions.users.first();
        let reason = args.slice(1).join(" ")
        if(!reason) reason = "No Reason Provided!"
        if(!target){

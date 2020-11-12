@@ -9,13 +9,13 @@ module.exports = {
     usage: ";ban [user]",
     permission: "BAN_MEMBERS",
     run: async (client, message, args) => {
-       if(!message.mentions.first()){
+       if(!message.mentions.users.first()){
           return message.channel.send(new Discord.MessageEmbed().setTitle("Oxygen U").setDescription(`<@${message.author.id}>, Specify A Vaild User!`).setColor("#00000").setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL()))
        }
        else{
         let reason = args.slice(1).join(" ")
         if(!reason) reason = "No Reason Provided!"
-        const target = message.mentions.first()
+        const target = message.mentions.users.first();
         const targetMember = message.guild.members.cache.get(target.id)
         if(targetMember)
         targetMember.ban({days:7,reason: reason})

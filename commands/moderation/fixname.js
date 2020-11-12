@@ -7,11 +7,11 @@ module.exports = {
     category: "moderation",
     description: "Fixes  The Selected User nickname",
     usage: ";fixname [user]",
-    permission: "KICK_MEMBERS",
+    permission: "MANAGE_NICKNAMES",
     run: async (client, message, args) => {
       if(args[0]){
      
-       const target = message.mentions.first()
+       const target = message.mentions.users.first();
      
  
        if(!target){

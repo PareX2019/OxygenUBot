@@ -20,7 +20,7 @@ module.exports = {
             message.delete({timeout: 5000})
          });
     }
-   const target = message.mentions.first()
+   const target = message.mentions.users.first();
    let reason = args.slice(1).join(" ")
    if(!reason) reason = "No Reason Provided!"
    if(!target){

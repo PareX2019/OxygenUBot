@@ -50,7 +50,7 @@ module.exports = {
                         const commands = fs.readdirSync(join(__dirname, `../${nameA}`)).filter(file => file.endsWith(".js"));
                         for(let file of commands){
                         let cmd = require(join(__dirname, `../${nameA}/${file}`))
-                         embedBig2.addField(`\`${capitalizeFirstLetter(cmd.name)}\``,cmd.description);
+                         embedBig2.addField(`\`;help ${cmd.name}\``,cmd.description);
                         }
                         return message.channel.send(embedBig2);
 
