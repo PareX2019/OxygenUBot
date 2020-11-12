@@ -22,9 +22,9 @@ module.exports = {
         }
         else{
                 let member = message.guild.member(message.mentions.users.first()||message.guild.members.cache.get(args[1]))
-                let reason = args.slice(2).join(" ");
+                let reason = args.slice(1).join(" ")
                 let time = args[1];
-                let logsChan = message.guild.channels.cache.find(c => c.name ==="oxygen-u-logs" && c.type=="text");
+                let logsChan = message.guild.channels.cache.find(c => c.name ==="logs" && c.type=="text");
 
                 if(!time){
                     let noPermEmbed = new Discord.MessageEmbed()

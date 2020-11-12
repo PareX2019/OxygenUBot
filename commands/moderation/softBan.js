@@ -21,7 +21,7 @@ module.exports = {
          });
     }
    const target = message.mentions.first()
-   let reason = args[1].slice().join(" ");
+   let reason = args.slice(1).join(" ")
    if(!reason) reason = "No Reason Provided!"
    if(!target){
       return message.channel.send(new Discord.MessageEmbed().setTitle("Oxygen U").setDescription(`<@${message.author.id}>, Specify A Vaild User!`).setColor("#00000").setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL()))
@@ -31,7 +31,7 @@ module.exports = {
     targetMember.ban({days:7,reason: reason})
     targetMember.unban();
     message.channel.send(new Discord.MessageEmbed().setTitle("Oxygen U").setDescription(`<@${message.author.id}>, ${targetMember} Has Been softBanned!`).setColor("#00000").setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL()))
-    let logsChan = message.guild.channels.cache.find(c => c.name ==="oxygen-u-logs" && c.type=="text");
+    let logsChan = message.guild.channels.cache.find(c => c.name ==="logs" && c.type=="text");
 
     let embed = new Discord.MessageEmbed()
     .setColor("#3edb1f")

@@ -48,7 +48,7 @@ module.exports = {
             message.reply(big).then(m => {
                 m.delete({timeout: 3000})
             });
-            let logsChan = message.guild.channels.cache.find(c => c.name ==="oxygen-u-logs" && c.type=="text");
+            let logsChan = message.guild.channels.cache.find(c => c.name ==="logs" && c.type=="text");
     
             let embed = new Discord.MessageEmbed()
             .setColor("#3edb1f")

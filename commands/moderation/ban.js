@@ -13,14 +13,14 @@ module.exports = {
           return message.channel.send(new Discord.MessageEmbed().setTitle("Oxygen U").setDescription(`<@${message.author.id}>, Specify A Vaild User!`).setColor("#00000").setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL()))
        }
        else{
-        let reason = args[1].slice().join(" ");
+        let reason = args.slice(1).join(" ")
         if(!reason) reason = "No Reason Provided!"
         const target = message.mentions.first()
         const targetMember = message.guild.members.cache.get(target.id)
         if(targetMember)
         targetMember.ban({days:7,reason: reason})
         message.channel.send(new Discord.MessageEmbed().setTitle("Oxygen U").setDescription(`<@${message.author.id}>, ${targetMember} Has Been Banned!`).setColor("#00000").setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL()))
-        let logsChan = message.guild.channels.cache.find(c => c.name ==="mod-logs" && c.type=="text");
+        let logsChan = message.guild.channels.cache.find(c => c.name ==="logs" && c.type=="text");
     
         let embed = new Discord.MessageEmbed()
         .setColor("#3edb1f")
