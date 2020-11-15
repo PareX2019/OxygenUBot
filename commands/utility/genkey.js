@@ -1,8 +1,8 @@
-const Discord = require('discord.js');
+﻿const Discord = require('discord.js');
 const http = require('axios');
 const { isBuffer } = require('util');
 const talkedRecently = new Set();
-
+const command = require('../../handlers/command');
 
 module.exports = {
     name: "genkey",
