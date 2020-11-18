@@ -6,6 +6,7 @@ module.exports = {
     category: "moderation",
     description: "Mutes the selected user",
     permission: "MANAGE_ROLES",
+    usage: ";mute @person time reason",
     run: async (client, message, args) => {
         if(!args[0]){
             const EmbedYes = new Discord.MessageEmbed()

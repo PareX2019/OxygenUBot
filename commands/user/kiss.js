@@ -38,7 +38,7 @@ module.exports = {
         }
 
         if(option > 5){
-            message.channel.send(`<@${message.author.id}> just kissed ${args[0].charAt(0).toUpperCase() + args[0].slice(1)}❤️❤️, ${gifs.toString()}`)
+          
             let embed1 = new Discord.MessageEmbed()
             .setDescription(`${message.author.username} just kissed ${args[0].charAt(0).toUpperCase() + args[0].slice(1)}❤️❤️`)
             .setThumbnail(gifs.toString())

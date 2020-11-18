@@ -9,13 +9,13 @@ module.exports = (client) => {
         for(let file of commands){
             let o = new Date().getTime();
             let pull = require(`../commands/${dir}/${file}`);
-            if(pull.name && pull.category){
+            if(pull.name && pull.category && pull.description && pull.usage && pull.permission){
                 let nm = pull.name.charAt(0).toUpperCase() + pull.name.slice(1);
                 let cat = pull.category.charAt(0).toUpperCase() + pull.category.slice(1);
                 client.commands.set(pull.name, pull);
                 table.addRow(cat, nm, `✅ (${new Date().getTime() - o}ms)`);
             } else {
-                table.addRow("N/A", file, "❌ (Missing name/category)");
+                table.addRow("N/A", file, "❌ (Missing name/category/description/usage/permission)");
                 continue;
             }
             if(pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(alias => client.aliases.set(alias, pull.name));
