@@ -8,11 +8,12 @@ module.exports = {
     description: "Returns veriy embed",
     usage: ";verify",
     permission: "SEND_MESSAGES",
+    aliases: ["verify"],
     run: async (client, message, args) => {
         let verificationEmbed = new Discord.MessageEmbed()
-        .setTitle("Oxygen U")
-        .setDescription("By Reacting With 👍 You Will Be Given Acess To Oxygen U's Amazing Server!")
-        message.channel.send(verificationEmbed).then(embed =>{
+            .setTitle("Oxygen U")
+            .setDescription("By Reacting With 👍 You Will Be Given Acess To Oxygen U's Amazing Server!")
+        message.channel.send(verificationEmbed).then(embed => {
             embed.react("👍");
         })
         message.delete();

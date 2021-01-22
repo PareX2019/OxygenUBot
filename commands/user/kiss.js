@@ -8,6 +8,7 @@ module.exports = {
     description: "Kiss Tagged User",
     usage: ";kiss @user",
     permission: "SEND_MESSAGES",
+    aliases: ["kiss","muah"],
     run: async (client, message, args) => {
         var kissGifss = [
             'https://media2.giphy.com/media/G3va31oEEnIkM/giphy.gif',
@@ -20,34 +21,37 @@ module.exports = {
             'https://media.giphy.com/media/nyGFcsP0kAobm/giphy.gif',
             'https://media0.giphy.com/media/KH1CTZtw1iP3W/source.gif'
         ];
-        let random = Math.floor(Math.random()* kissGifss.length);
+        let random = Math.floor(Math.random() * kissGifss.length);
         let gifs = kissGifss[random];
         let option = Math.floor((Math.random() * 10) + 1)
-        if(!args[0]){
+        if (!args[0]) {
             const EmbedYes = new Discord.MessageEmbed()
-            .setColor('#00a9be')
-            .setTimestamp()
-            .setTitle(`Oxygen U | Kiss`)
-            .addField(`Usage: ';kiss [user]'`,"Kiss Tagged User")
-            .setFooter(`Command Run By ${message.author.username}`,message.author.avatarURL())
-            
-             return message.channel.send(EmbedYes).then(msg =>{
-                msg.delete({timeout:7000})
-                message.delete({timeout: 7000})
-             });
+                .setColor('#00a9be')
+                .setTimestamp()
+                .setTitle(`Oxygen U | Kiss`)
+                .addField(`Usage: ';kiss [user]'`, "Kiss Tagged User")
+                .setFooter(`Command Run By ${message.author.username}`, message.author.avatarURL())
+
+            return message.channel.send(EmbedYes).then(msg => {
+                msg.delete({
+                    timeout: 7000
+                })
+                message.delete({
+                    timeout: 7000
+                })
+            });
         }
 
-        if(option > 5){
-          
+        if (option > 5) {
+
             let embed1 = new Discord.MessageEmbed()
-            .setDescription(`${message.author.username} just kissed ${args[0].charAt(0).toUpperCase() + args[0].slice(1)}❤️❤️`)
-            .setThumbnail(gifs.toString())
-           message.channel.send(embed1);
-        }
-        else{
+                .setDescription(`${message.author.username} just kissed ${args[0].charAt(0).toUpperCase() + args[0].slice(1)}❤️❤️`)
+                .setImage(gifs.toString())
+            message.channel.send(embed1);
+        } else {
             let embed2 = new Discord.MessageEmbed()
-            .setDescription(`${message.author.username} just tried to kiss ${args[0].charAt(0).toUpperCase() + args[0].slice(1)} 🤮🤮🤮`)
-           message.channel.send(embed2);
+                .setDescription(`${message.author.username} just tried to kiss ${args[0].charAt(0).toUpperCase() + args[0].slice(1)} 🤮🤮🤮`)
+            message.channel.send(embed2);
         }
     }
 }
